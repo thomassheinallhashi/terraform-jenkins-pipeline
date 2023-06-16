@@ -29,14 +29,12 @@ sudo bash -c "cat >/root/.aws/config" <<EOF
 [default]
 aws_access_key_id=${AWS_ACCESS_KEY}
 aws_secret_access_key=${AWS_SECRET_KEY}
-aws_session_token=${AWS_SESSION_TOKEN}
 region=${AWS_REGION}
 EOF
 sudo bash -c "cat >/root/.aws/credentials" <<EOF
 [default]
 aws_access_key_id=${AWS_ACCESS_KEY}
 aws_secret_access_key=${AWS_SECRET_KEY}
-aws_session_token=${AWS_SESSION_TOKEN}
 region=${AWS_REGION}
 EOF
 
