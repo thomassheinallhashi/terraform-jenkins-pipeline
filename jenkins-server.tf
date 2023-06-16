@@ -6,6 +6,8 @@ resource "aws_instance" "jenkins-server" {
     vpc_security_group_ids = [aws_security_group.jenkins-server-sg.id]
     user_data = templatefile("${path.module}/scripts/jenkins-install.sh", {
         AWS_ACCESS_KEY = var.aws_access_key,
+        AWS_SECRET_KEY = var.aws_secret_key,
+        AWS_SESSION_TOKEN = var.aws_session_token,
         AWS_REGION = var.aws_region,
         BEARER_TOKEN = var.tfe_api_token,
         ASSET_BUCKET = var.bucket,
@@ -26,7 +28,7 @@ resource "aws_security_group" "jenkins-server-sg" {
     name = "${var.prefix}-jenkins-server-sg"
     description = "Jenkins server security group"
     vpc_id = data.aws_vpc.primary-vpc.id
-    
+
     ingress {
         from_port = 22
         to_port = 22
