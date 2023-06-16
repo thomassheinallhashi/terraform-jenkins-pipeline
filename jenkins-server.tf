@@ -1,5 +1,5 @@
 resource "aws_instance" "jenkins-server" {
-    ami = "ami-830c94e3"    
+    ami = data.aws_ami.ubuntu.id
     instance_type = var.instance_type
     key_name = var.key_pair
     iam_instance_profile = aws_iam_instance_profile.jenkins-main-profile.id
@@ -27,8 +27,8 @@ resource "aws_instance" "jenkins-server" {
 resource "aws_security_group" "jenkins-server-sg" {
     name = "${var.prefix}-jenkins-server-sg"
     description = "Jenkins server security group"
-  
-
+    vpc_id = data.aws_vpc.primary-vpc.id
+    
     ingress {
         from_port = 22
         to_port = 22
